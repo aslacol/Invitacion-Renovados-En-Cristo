@@ -89,10 +89,7 @@
 
         // Esta función se llama al hacer clic en el botón de confirmar
         function confirmarAsistencia() {
-            // ----- IMPORTANTE -----
-            // Reemplaza este número con el tuyo.
-            // Debe incluir el código de país sin el '+' ni '00'. Por ejemplo: 57 para Colombia.
-            const numeroWhatsapp = '573001234567'; // <-- CAMBIA ESTE NÚMERO
+            const numeroWhatsapp = '573167467514';
 
             const params = new URLSearchParams(window.location.search);
             let nombre = params.get('invitado');
@@ -100,10 +97,26 @@
             if (nombre) {
                 nombre = decodeURIComponent(nombre.replace(/\+/g, ' '));
             } else {
-                nombre = 'Invitado Especial'; // Mensaje por defecto si no hay nombre
+                nombre = 'Invitado Especial';
             }
+            
+            // --- NUEVA LÓGICA PARA SALUDO DINÁMICO ---
+            // Obtiene la hora actual en la zona horaria de Colombia (America/Bogota)
+            const horaActual = new Date().toLocaleString("en-US", {timeZone: "America/Bogota", hour: '2-digit', hour12: false});
+            const horaNumero = parseInt(horaActual);
 
-            const mensaje = `¡Paz de Cristo! Confirmo mi asistencia al 5to Aniversario. Atentamente, ${nombre}`;
+            let saludo;
+            if (horaNumero >= 5 && horaNumero < 12) {
+                saludo = 'Buenos días';
+            } else if (horaNumero >= 12 && horaNumero < 18) {
+                saludo = 'Buenas tardes';
+            } else {
+                saludo = 'Buenas noches';
+            }
+            
+            const mensaje = `Hola, ${saludo}. Bendiciones, confirmo mi asistencia al 5to Aniversario. Atentamente, ${nombre}`;
+            // --- FIN DE LA NUEVA LÓGICA ---
+
             const mensajeCodificado = encodeURIComponent(mensaje);
             const urlWhatsapp = `https://wa.me/${numeroWhatsapp}?text=${mensajeCodificado}`;
 
