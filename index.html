@@ -9,8 +9,8 @@
     <style>
         body {
             font-family: 'Lato', sans-serif;
-            /* Se establece la imagen de la invitación como fondo */
-            background-image: url('https://i.ibb.co/99wLR7d7/Copia-de-aniversario-iglesia-1.png');
+            /* Se establece la nueva imagen de la invitación como fondo */
+            background-image: url('https://i.ibb.co/1tZwYSD5/Copia-de-aniversario-iglesia-4.png');
             background-size: cover;
             background-position: center;
             background-attachment: fixed; /* Evita que el fondo se mueva */
@@ -32,7 +32,7 @@
             from { opacity: 0; transform: scale(0.95); }
             to { opacity: 1; transform: scale(1); }
         }
-        /* Estilo de luz actualizado a tonos azul cielo */
+        /* Estilo de luz (ya no se usa en el h2, pero se mantiene por si acaso) */
         .luz-efecto {
             color: #1e3a8a; /* Tono azul oscuro, elegante */
             font-weight: bold;
@@ -46,8 +46,8 @@
 <body class="flex items-center justify-center min-h-screen p-4">
 
     <!-- Sección de Pre-Invitación (se muestra primero) -->
-    <div id="pre-invitacion" class="text-center bg-white/75 backdrop-blur-md p-8 md:p-12 rounded-xl shadow-2xl max-w-lg w-full card-enter">
-        <h2 class="text-2xl mb-4 tracking-wider uppercase luz-efecto">Iglesia Renovados en Cristo</h2>
+    <div id="pre-invitacion" class="text-center bg-white/50 backdrop-blur-md p-8 md:p-12 rounded-xl shadow-2xl max-w-lg w-full card-enter">
+        <h2 class="font-display text-3xl text-gray-800 mb-4">Iglesia Renovados en Cristo</h2>
         <h1 id="nombre-invitado" class="font-script text-5xl md:text-6xl text-blue-900 font-bold mb-8">Cargando...</h1>
         <p class="text-gray-600 mb-8">Has recibido una invitación para un tiempo de bendición.</p>
         <button onclick="mostrarInvitacion()" class="bg-blue-600 text-white font-bold py-3 px-8 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-transform transform hover:scale-105">
@@ -130,4 +130,3 @@
     </script>
 </body>
 </html>
-
