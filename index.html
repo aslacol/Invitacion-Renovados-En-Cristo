@@ -32,15 +32,6 @@
             from { opacity: 0; transform: scale(0.95); }
             to { opacity: 1; transform: scale(1); }
         }
-        /* Estilo de luz (ya no se usa en el h2, pero se mantiene por si acaso) */
-        .luz-efecto {
-            color: #1e3a8a; /* Tono azul oscuro, elegante */
-            font-weight: bold;
-            /* Resplandor en tonos azul cielo */
-            text-shadow: 0 0 5px rgba(255, 255, 255, 0.9),   /* Halo interior blanco para definición */
-                         0 0 15px rgba(135, 206, 250, 0.8),  /* Resplandor principal azul cielo (lightskyblue) */
-                         0 0 30px rgba(135, 206, 250, 0.6);  /* Resplandor exterior más suave */
-        }
     </style>
 </head>
 <body class="flex items-center justify-center min-h-screen p-4">
@@ -56,19 +47,26 @@
     </div>
 
     <!-- Sección de la Invitación Completa (oculta al inicio) -->
-    <div id="invitacion-completa" class="hidden max-w-lg w-full invitation-reveal text-center">
-         <div class="bg-white p-4 rounded-xl shadow-2xl">
-            <img src="https://i.ibb.co/qLtqpx1q/Copia-de-aniversario-iglesia.png" alt="Invitación al 5to Aniversario de la Iglesia Renovados en Cristo" class="rounded-lg w-full">
-            <!-- Sección para confirmar asistencia -->
-            <div class="pt-6 pb-2">
-                <p class="text-gray-700 mb-4">¡Esperamos contar con tu presencia! <br>Por favor, confirma tu asistencia.</p>
-                <button onclick="confirmarAsistencia()" class="bg-green-500 text-white font-bold py-3 px-8 rounded-lg hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-opacity-50 transition-transform transform hover:scale-105 inline-flex items-center space-x-2">
-                    <!-- Icono de WhatsApp -->
-                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 12c0 1.74.45 3.38 1.25 4.81L2 22l5.34-1.38c1.37.72 2.93 1.15 4.57 1.15h.1c5.46 0 9.91-4.45 9.91-9.91 0-5.46-4.45-9.91-9.91-9.91zM17.47 16c-.2-.1-.58-.29-.67-.32-.09-.04-.16-.06-.35.18-.19.23-.72.84-.88 1.01-.16.17-.32.19-.51.09-.19-.1-.82-.3-1.56-.96-.58-.51-1.03-1.15-1.15-1.34-.12-.19-.01-.3 0-.4s.18-.23.27-.32c.09-.09.13-.16.19-.27.06-.11.03-.2-.01-.29-.04-.09-.35-.84-.48-1.15-.13-.3-.26-.26-.35-.26h-.29c-.09 0-.23.03-.35.16-.12.13-.48.46-.48 1.13s.49 1.31.56 1.4s.97 1.48 2.37 2.08c.34.15.61.24.82.31.28.09.52.08.71-.05.22-.15.58-.63.66-.84.08-.2.08-.38.05-.43z"></path></svg>
-                    <span>Confirmar por WhatsApp</span>
-                </button>
-            </div>
-         </div>
+    <div id="invitacion-completa" class="hidden text-center bg-white/50 backdrop-blur-md p-4 rounded-xl shadow-2xl max-w-lg w-full invitation-reveal">
+        <img onclick="mostrarImagenCompleta()" src="https://i.ibb.co/qLtqpx1q/Copia-de-aniversario-iglesia.png" alt="Invitación al 5to Aniversario de la Iglesia Renovados en Cristo" class="rounded-lg w-full cursor-pointer">
+        <!-- Sección para confirmar asistencia -->
+        <div class="pt-6 pb-2">
+            <p class="text-gray-700 mb-4">¡Esperamos contar con tu presencia! <br>Por favor, confirma tu asistencia.</p>
+            <button onclick="confirmarAsistencia()" class="bg-green-500 text-white font-bold py-3 px-8 rounded-lg hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-opacity-50 transition-transform transform hover:scale-105 inline-flex items-center space-x-2">
+                <!-- Icono de WhatsApp -->
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 12c0 1.74.45 3.38 1.25 4.81L2 22l5.34-1.38c1.37.72 2.93 1.15 4.57 1.15h.1c5.46 0 9.91-4.45 9.91-9.91 0-5.46-4.45-9.91-9.91-9.91zM17.47 16c-.2-.1-.58-.29-.67-.32-.09-.04-.16-.06-.35.18-.19.23-.72.84-.88 1.01-.16.17-.32.19-.51.09-.19-.1-.82-.3-1.56-.96-.58-.51-1.03-1.15-1.15-1.34-.12-.19-.01-.3 0-.4s.18-.23.27-.32c.09-.09.13-.16.19-.27.06-.11.03-.2-.01-.29-.04-.09-.35-.84-.48-1.15-.13-.3-.26-.26-.35-.26h-.29c-.09 0-.23.03-.35.16-.12.13-.48.46-.48 1.13s.49 1.31.56 1.4s.97 1.48 2.37 2.08c.34.15.61.24.82.31.28.09.52.08.71-.05.22-.15.58-.63.66-.84.08-.2.08-.38.05-.43z"></path></svg>
+                <span>Confirmar por WhatsApp</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Ventana flotante (Modal) para la IMAGEN -->
+    <div id="image-modal" class="hidden fixed inset-0 bg-black bg-opacity-80 z-50 flex items-center justify-center p-4 invitation-reveal">
+        <div class="bg-white p-2 rounded-xl shadow-2xl max-w-3xl w-full relative">
+            <!-- Botón para cerrar la ventana flotante -->
+            <button onclick="cerrarImagenCompleta()" class="absolute -top-3 -right-3 bg-white rounded-full p-1 text-gray-700 hover:text-black text-4xl font-bold z-10 w-10 h-10 flex items-center justify-center">&times;</button>
+            <img src="https://i.ibb.co/qLtqpx1q/Copia-de-aniversario-iglesia.png" alt="Invitación en tamaño completo" class="rounded-lg w-full">
+        </div>
     </div>
 
     <script>
@@ -88,7 +86,17 @@
         // Esta función se llama al hacer clic en el botón de abrir
         function mostrarInvitacion() {
             document.getElementById('pre-invitacion').style.display = 'none';
-            document.getElementById('invitacion-completa').style.display = 'block';
+            document.getElementById('invitacion-completa').classList.remove('hidden');
+        }
+        
+        // Nueva función para mostrar solo la imagen en un modal
+        function mostrarImagenCompleta() {
+            document.getElementById('image-modal').classList.remove('hidden');
+        }
+
+        // Nueva función para cerrar el modal de la imagen
+        function cerrarImagenCompleta() {
+            document.getElementById('image-modal').classList.add('hidden');
         }
 
         // Esta función se llama al hacer clic en el botón de confirmar
@@ -104,8 +112,6 @@
                 nombre = 'Invitado Especial';
             }
             
-            // --- NUEVA LÓGICA PARA SALUDO DINÁMICO ---
-            // Obtiene la hora actual en la zona horaria de Colombia (America/Bogota)
             const horaActual = new Date().toLocaleString("en-US", {timeZone: "America/Bogota", hour: '2-digit', hour12: false});
             const horaNumero = parseInt(horaActual);
 
@@ -119,8 +125,6 @@
             }
             
             const mensaje = `Hola, ${saludo}. Bendiciones, confirmo mi asistencia al 5to Aniversario. Atentamente, ${nombre}`;
-            // --- FIN DE LA NUEVA LÓGICA ---
-
             const mensajeCodificado = encodeURIComponent(mensaje);
             const urlWhatsapp = `https://wa.me/${numeroWhatsapp}?text=${mensajeCodificado}`;
 
