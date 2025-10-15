@@ -27,30 +27,16 @@
         body::before {
             content: '';
             position: fixed;
-            top: -10%; /* Extender para permitir movimiento sin bordes */
-            left: -10%;
-            width: 120%; /* Hacer más grande para el efecto de zoom y paneo */
-            height: 120%;
-            background-image: url('https://i.ibb.co/1tZwYSD5/Copia-de-aniversario-iglesia-4.png');
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExazZvaDcwcDdibnh0MWIwN3IxMHMwdnlzd3c2cXQ2aXBndGk5aWk3ZiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/c5F59szdCll7wQx6tZ/giphy.gif');
             background-size: cover;
             background-position: center;
-            opacity: 0.15;
+            opacity: 0.2;
             z-index: 0;
             pointer-events: none;
-            /* Nueva animación de zoom y paneo para evitar cortes */
-            animation: moveSky 60s ease-in-out infinite;
-        }
-
-        @keyframes moveSky {
-            0% {
-                transform: scale(1) translate(0, 0);
-            }
-            50% {
-                transform: scale(1.1) translate(-5%, 5%);
-            }
-            100% {
-                transform: scale(1) translate(0, 0);
-            }
         }
 
         @keyframes gradientShift {
