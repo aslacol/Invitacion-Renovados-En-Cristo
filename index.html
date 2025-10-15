@@ -486,7 +486,7 @@
 
             const mensaje = `${saludo}\n\n✨ Bendiciones ✨\n\nConfirmo mi asistencia al 5to Aniversario de la Iglesia Renovados en Cristo.\n\nAtentamente,\n${nombre} 🙏`;
             
-            const urlWhatsapp = `https://wa.me/${numeroWhatsapp}?text=${encodeURIComponent(mensaje)}`;
+            const urlWhatsapp = `https://api.whatsapp.com/send?phone=${numeroWhatsapp}&text=${encodeURIComponent(mensaje)}`;
             window.open(urlWhatsapp, '_blank');
         }
 
@@ -504,10 +504,13 @@
             }
         });
 
-        // --- LÓGICA DEL GENERADOR DE INVITACIONES (NO del de reservas) ---
+        // --- LÓGICA DEL GENERADOR DE INVITACIONES ---
+        function getInvitationMessage(nombre, link) {
+             return `✨ ¡Bendiciones, ${nombre}! ✨\n\n😊 Con gran alegría te extendemos esta invitación especial para celebrar juntos el 5to Aniversario de nuestra amada Iglesia Renovados en Cristo.\n\n🙏 Será un tiempo de gozo, adoración y gratitud por todo lo que Dios ha hecho.\n\n💫 Esperamos contar con tu valiosa presencia.\n\n━━━━━━━━━━━━━━━━━━━━━━━\n\n📩 Para ver tu invitación personal, haz clic en el siguiente enlace:\n\n${link}\n\n━━━━━━━━━━━━━━━━━━━━━━━\n\n🕊️ ¡Dios te bendiga! 🕊️`;
+        }
+
         function generarMensaje() {
             const nombre = document.getElementById('g-nombre').value.trim();
-            const whatsappInvitado = document.getElementById('g-whatsapp').value.trim();
             const confirmWhatsapp = document.getElementById('g-confirm-whatsapp').value.trim();
 
             if (!nombre) { 
@@ -526,8 +529,7 @@
             let link = `${baseUrl}?invitado=${encodeURIComponent(nombre)}`;
             link += `&confirmar_a=${encodeURIComponent(confirmWhatsapp.replace(/\s/g, '').replace(/\+/g, ''))}`;
 
-            const mensaje = `✨ ¡Bendiciones, ${nombre}! ✨\n\n😊 Con gran alegría te extendemos esta invitación especial para celebrar juntos el 5to Aniversario de nuestra amada Iglesia Renovados en Cristo.\n\n🙏 Será un tiempo de gozo, adoración y gratitud por todo lo que Dios ha hecho.\n\n💫 Esperamos contar con tu valiosa presencia.\n\n━━━━━━━━━━━━━━━━━━━━━━━\n\n📩 Para ver tu invitación personal, haz clic en el siguiente enlace:\n\n${link}\n\n━━━━━━━━━━━━━━━━━━━━━━━\n\n🕊️ ¡Dios te bendiga! 🕊️`;
-
+            const mensaje = getInvitationMessage(nombre, link);
             document.getElementById('generated-message').textContent = mensaje;
             
             setTimeout(() => {
@@ -565,29 +567,38 @@
         }
 
         function enviarMensaje() {
+            const nombre = document.getElementById('g-nombre').value.trim();
+            const confirmWhatsapp = document.getElementById('g-confirm-whatsapp').value.trim();
             let whatsappNum = document.getElementById('g-whatsapp').value.trim();
-            const mensaje = document.getElementById('generated-message').textContent;
             
             if (!whatsappNum) { 
                 alert("⚠️ Por favor, ingresa el número de WhatsApp del invitado."); 
                 document.getElementById('g-whatsapp').focus();
                 return; 
             }
+             if (!nombre) { 
+                alert("⚠️ Por favor, ingresa el nombre del invitado."); 
+                document.getElementById('g-nombre').focus();
+                return; 
+            }
+            if (!confirmWhatsapp) { 
+                alert("⚠️ Por favor, ingresa tu número de WhatsApp para recibir la confirmación."); 
+                document.getElementById('g-confirm-whatsapp').focus();
+                return; 
+            }
+
+            const baseUrl = 'https://aslacol.github.io/Invitacion-Renovados-En-Cristo/';
+            let link = `${baseUrl}?invitado=${encodeURIComponent(nombre)}`;
+            link += `&confirmar_a=${encodeURIComponent(confirmWhatsapp.replace(/\s/g, '').replace(/\+/g, ''))}`;
+
+            // Se reconstruye el mensaje aquí para asegurar la codificación correcta
+            const mensaje = getInvitationMessage(nombre, link);
             
             whatsappNum = whatsappNum.replace(/\s/g, '').replace(/\+/g, '');
 
-            const urlWhatsapp = `https://wa.me/${whatsappNum}?text=${encodeURIComponent(mensaje)}`;
+            const urlWhatsapp = `https://api.whatsapp.com/send?phone=${whatsappNum}&text=${encodeURIComponent(mensaje)}`;
             window.open(urlWhatsapp, '_blank');
         }
-
-        // Event Listeners para el generador de invitaciones
-        document.addEventListener('DOMContentLoaded', () => {
-          const copyBtn = document.querySelector('#generator-view .copy-btn');
-          const sendBtn = document.querySelector('#generator-view .whatsapp-btn');
-          
-          if(copyBtn) copyBtn.addEventListener('click', copiarMensaje);
-          if(sendBtn) sendBtn.addEventListener('click', enviarMensaje);
-        });
     </script>
 </body>
 </html>
