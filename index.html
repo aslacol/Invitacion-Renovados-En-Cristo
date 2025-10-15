@@ -188,14 +188,16 @@
         }
 
         /* Inputs mejorados */
-        input[type="text"],
-        input[type="tel"] {
+        input, .form-input {
             transition: all 0.3s ease;
             border: 2px solid #e0e0e0;
+            background-color: white;
+            padding: 0.75rem;
+            border-radius: 0.75rem;
+            width: 100%;
         }
 
-        input[type="text"]:focus,
-        input[type="tel"]:focus {
+        input:focus, .form-input:focus {
             outline: none;
             border-color: #3b82f6; /* Azul de Tailwind */
             box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
@@ -449,11 +451,13 @@
                 document.getElementById('nombre-invitado').textContent = nombreDecoded;
                 document.getElementById('nombre-invitado-final').textContent = nombreDecoded;
             } else {
+                // Por defecto, mostrar el generador de invitaciones si no hay parámetros
                 document.getElementById('invitation-view').classList.add('hidden');
                 document.getElementById('generator-view').classList.remove('hidden');
             }
         };
 
+        // --- LÓGICA DE INVITACIÓN (PARA INVITADOS) ---
         function mostrarInvitacion() {
             document.getElementById('pre-invitacion').style.display = 'none';
             document.getElementById('invitacion-completa').classList.remove('hidden');
@@ -463,13 +467,9 @@
             const params = new URLSearchParams(window.location.search);
             const nombre = decodeURIComponent(params.get('invitado')?.replace(/\+/g, ' ') || 'Invitado Especial');
             
-            // Lógica de fallback para el número de WhatsApp
-            // Primero, intenta obtener el número del parámetro 'confirmar_a' en el enlace.
             let numeroWhatsapp = params.get('confirmar_a');
-
-            // Si el parámetro no existe (para los enlaces antiguos), usa el número por defecto.
             if (!numeroWhatsapp) {
-                numeroWhatsapp = '573167467514'; // Este es el número de respaldo (el 316...)
+                numeroWhatsapp = '573167467514'; 
             }
 
             const horaActual = new Date().toLocaleString("en-US", {timeZone: "America/Bogota", hour: '2-digit', hour12: false});
@@ -498,14 +498,13 @@
             document.getElementById('image-modal').classList.add('hidden'); 
         }
 
-        // Cerrar modal con tecla ESC
         document.addEventListener('keydown', function(event) {
             if (event.key === 'Escape') {
                 cerrarImagenCompleta();
             }
         });
 
-        // --- LÓGICA DEL GENERADOR DE ENLACES ---
+        // --- LÓGICA DEL GENERADOR DE INVITACIONES (NO del de reservas) ---
         function generarMensaje() {
             const nombre = document.getElementById('g-nombre').value.trim();
             const whatsappInvitado = document.getElementById('g-whatsapp').value.trim();
@@ -531,7 +530,6 @@
 
             document.getElementById('generated-message').textContent = mensaje;
             
-            // Scroll suave al resultado
             setTimeout(() => {
                 document.getElementById('output-section').scrollIntoView({ 
                     behavior: 'smooth', 
@@ -581,6 +579,15 @@
             const urlWhatsapp = `https://wa.me/${whatsappNum}?text=${encodeURIComponent(mensaje)}`;
             window.open(urlWhatsapp, '_blank');
         }
+
+        // Event Listeners para el generador de invitaciones
+        document.addEventListener('DOMContentLoaded', () => {
+          const copyBtn = document.querySelector('#generator-view .copy-btn');
+          const sendBtn = document.querySelector('#generator-view .whatsapp-btn');
+          
+          if(copyBtn) copyBtn.addEventListener('click', copiarMensaje);
+          if(sendBtn) sendBtn.addEventListener('click', enviarMensaje);
+        });
     </script>
 </body>
 </html>
