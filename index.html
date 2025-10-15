@@ -16,7 +16,7 @@
 
         body {
             font-family: 'Lato', sans-serif;
-            /* Paleta de colores con más contraste para un movimiento notable */
+            /* El degradado ahora sirve como fallback */
             background: linear-gradient(270deg, #2c5282, #60a5fa, #bfdbfe);
             background-size: 400% 400%;
             animation: gradientShift 20s ease infinite;
@@ -34,7 +34,7 @@
             background-image: url('https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExazZvaDcwcDdibnh0MWIwN3IxMHMwdnlzd3c2cXQ2aXBndGk5aWk3ZiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/c5F59szdCll7wQx6tZ/giphy.gif');
             background-size: cover;
             background-position: center;
-            opacity: 0.2;
+            opacity: 1; /* Opacidad al 100% para solidez completa */
             z-index: 0;
             pointer-events: none;
         }
@@ -93,9 +93,9 @@
 
         /* Glassmorphism mejorado */
         .glass-card {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            border: 2px solid rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             box-shadow: 
                 0 8px 32px 0 rgba(31, 38, 135, 0.37),
                 0 0 0 1px rgba(255, 255, 255, 0.1) inset;
@@ -148,12 +148,12 @@
 
         /* WhatsApp button mejorado */
         .btn-whatsapp {
-            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+            background: linear-gradient(135deg, rgba(37, 211, 102, 0.7) 0%, rgba(18, 140, 126, 0.7) 100%);
             transition: all 0.3s ease;
         }
 
         .btn-whatsapp:hover {
-            background: linear-gradient(135deg, #128C7E 0%, #075E54 100%);
+            background: linear-gradient(135deg, rgba(18, 140, 126, 0.8) 0%, rgba(7, 94, 84, 0.8) 100%);
             transform: translateY(-3px) scale(1.05);
             box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
         }
