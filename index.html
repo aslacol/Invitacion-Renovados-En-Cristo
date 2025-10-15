@@ -78,6 +78,23 @@
             0% { background-position: -1000px 0; }
             100% { background-position: 1000px 0; }
         }
+        
+        /* Nueva animación para el borde de luz */
+        @keyframes glow {
+            0%, 100% {
+                box-shadow: 0 0 15px 3px rgba(212, 175, 55, 0.7);
+            }
+            50% {
+                box-shadow: 0 0 30px 10px rgba(244, 229, 161, 0.9);
+            }
+        }
+
+        .glowing-border {
+            display: inline-block;
+            border-radius: 50%;
+            animation: glow 3s ease-in-out infinite;
+        }
+
 
         .card-enter {
             animation: fadeInUp 0.8s ease-out;
@@ -93,7 +110,7 @@
 
         /* Glassmorphism mejorado */
         .glass-card {
-            background: rgba(255, 255, 255, 0.7);
+            background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(15px);
             border: 1px solid rgba(255, 255, 255, 0.2);
             box-shadow: 
@@ -245,13 +262,15 @@
             <!-- Sección de Pre-Invitación -->
             <div id="pre-invitacion" class="text-center glass-card p-8 md:p-12 rounded-2xl shadow-2xl card-enter">
                 <div class="floating mb-6">
-                    <svg class="w-20 h-20 mx-auto text-gold" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/>
-                        <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/>
-                    </svg>
+                    <div class="glowing-border p-3">
+                        <svg class="w-16 h-16 mx-auto text-sky-500" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/>
+                            <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/>
+                        </svg>
+                    </div>
                 </div>
                 
-                <h1 id="nombre-invitado" class="font-script text-5xl md:text-6xl text-gold font-bold mb-6 leading-tight"></h1>
+                <h1 id="nombre-invitado" class="font-script text-5xl md:text-6xl text-gold font-bold mb-6"></h1>
                 
                 <div class="divider"></div>
                 
@@ -270,7 +289,7 @@
             <!-- Sección de la Invitación Completa -->
             <div id="invitacion-completa" class="hidden text-center glass-card p-6 md:p-8 rounded-2xl shadow-2xl invitation-reveal">
                 
-                <h2 id="nombre-invitado-final" class="font-script text-4xl md:text-5xl text-gold font-bold my-6 leading-tight"></h2>
+                <h2 id="nombre-invitado-final" class="font-script text-4xl md:text-5xl text-gold font-bold my-6"></h2>
                 
                 <div class="divider"></div>
                 
