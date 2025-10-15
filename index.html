@@ -477,14 +477,14 @@
 
             let saludo;
             if (horaNumero >= 5 && horaNumero < 12) { 
-                saludo = '¡Buenos días! \u2600\ufe0f';
+                saludo = '¡Buenos días! ☀️';
             } else if (horaNumero >= 12 && horaNumero < 18) { 
-                saludo = '¡Buenas tardes! \ud83c\udf24\ufe0f';
+                saludo = '¡Buenas tardes! 🌤️';
             } else { 
-                saludo = '¡Buenas noches! \ud83c\udf19';
+                saludo = '¡Buenas noches! 🌙';
             }
 
-            const mensaje = `${saludo}\n\n\u2728 Bendiciones \u2728\n\nConfirmo mi asistencia al 5to Aniversario de la Iglesia Renovados en Cristo.\n\nAtentamente,\n${nombre} \ud83d\ude4f`;
+            const mensaje = `${saludo}\n\n✨ Bendiciones ✨\n\nConfirmo mi asistencia al 5to Aniversario de la Iglesia Renovados en Cristo.\n\nAtentamente,\n${nombre} 🙏`;
             
             const urlWhatsapp = `https://wa.me/${numeroWhatsapp}?text=${encodeURIComponent(mensaje)}`;
             window.open(urlWhatsapp, '_blank');
@@ -527,7 +527,7 @@
             let link = `${baseUrl}?invitado=${encodeURIComponent(nombre)}`;
             link += `&confirmar_a=${encodeURIComponent(confirmWhatsapp.replace(/\s/g, '').replace(/\+/g, ''))}`;
 
-            const mensaje = `\u2728 ¡Bendiciones, ${nombre}! \u2728\n\n\ud83d\ude0a Con gran alegría te extendemos esta invitación especial para celebrar juntos el 5to Aniversario de nuestra amada Iglesia Renovados en Cristo.\n\n\ud83d\ude4f Será un tiempo de gozo, adoración y gratitud por todo lo que Dios ha hecho.\n\n\ud83d\udcab Esperamos contar con tu valiosa presencia.\n\n━━━━━━━━━━━━━━━━━━━━━━━\n\n\ud83d\udce9 Para ver tu invitación personal, haz clic en el siguiente enlace:\n\n${link}\n\n━━━━━━━━━━━━━━━━━━━━━━━\n\n\ud83d\udd4a\ufe0f ¡Dios te bendiga! \ud83d\udd4a\ufe0f`;
+            const mensaje = `✨ ¡Bendiciones, ${nombre}! ✨\n\n😊 Con gran alegría te extendemos esta invitación especial para celebrar juntos el 5to Aniversario de nuestra amada Iglesia Renovados en Cristo.\n\n🙏 Será un tiempo de gozo, adoración y gratitud por todo lo que Dios ha hecho.\n\n💫 Esperamos contar con tu valiosa presencia.\n\n━━━━━━━━━━━━━━━━━━━━━━━\n\n📩 Para ver tu invitación personal, haz clic en el siguiente enlace:\n\n${link}\n\n━━━━━━━━━━━━━━━━━━━━━━━\n\n🕊️ ¡Dios te bendiga! 🕊️`;
 
             document.getElementById('generated-message').textContent = mensaje;
             
